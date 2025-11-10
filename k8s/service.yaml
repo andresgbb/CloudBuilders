@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudbuilders-service
+  labels:
+    app: cloudbuilders
+spec:
+  selector:
+    app: cloudbuilders
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
