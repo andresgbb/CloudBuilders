@@ -15,7 +15,7 @@ type CommandResponse struct {
 	Result string `json:"result"`
 }
 
-// HandleCommand maneja la ruta "/api/command"
+// HandleCommand maneja la ruta"/api/command"
 // Recibe un comando JSON y devuelve una respuesta JSON con el resultado
 func (s *Server) HandleCommand(w http.ResponseWriter, r *http.Request) {
 	var req CommandRequest
