@@ -1,0 +1,66 @@
+/* Fondo y estilo general */
+body {
+  background-color: #000;
+  color: #0f0;
+  font-family: monospace;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* Título centrado */
+.title {
+  text-align: center;
+  color: #00ff00;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  margin-top: 40px;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+/* Contenedor de la terminal */
+#terminal {
+  width: 80%;
+  max-width: 800px;
+  background-color: #000;
+  border: 2px solid #0f0;
+  padding: 15px;
+  box-shadow: 0 0 15px #0f0;
+}
+
+/* Texto y salida */
+#output {
+  white-space: pre-wrap;
+  margin-bottom: 10px;
+}
+
+/* Línea de comando */
+#input-line {
+  display: flex;
+  align-items: center;
+}
+
+.prompt {
+  margin-right: 10px;
+}
+
+#input {
+  background: none;
+  border: none;
+  color: #0f0;
+  outline: none;
+  flex: 1;
+}
+
+/* Scrollbar verde (opcional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #0f0;
+}

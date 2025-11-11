@@ -1,22 +1,12 @@
 package server
 
-import (
-	"fmt"
-	"net/http"
-)
-
+// Importamos solo lo necesario
+// (ya no necesitamos fmt ni net/http en este archivo)
+ 
+// Server representa nuestro servidor HTTP.
 type Server struct{}
 
+// New devuelve una nueva instancia del servidor.
 func New() *Server {
 	return &Server{}
-}
-
-func (s *Server) Router() http.Handler {
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "👋 Bienvenido a CloudBuilders Terminal!")
-	})
-
-	return mux
 }
