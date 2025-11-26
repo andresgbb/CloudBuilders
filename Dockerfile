@@ -1,5 +1,5 @@
 # ---- Etapa de compilación ----
-FROM golang:1.22-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
 # Instalar certificados (git no es necesario si go.mod está completo)
 RUN apk add --no-cache ca-certificates
