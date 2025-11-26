@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: jenkins-sa-clusterrole
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list", "watch"]
+  # permisos para gestionar deployments/services/secrets en el namespace default
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["pods", "services", "secrets", "configmaps", "events"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins-sa-clusterrolebinding
+subjects:
+  - kind: ServiceAccount
+    name: jenkins-sa
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: jenkins-sa-clusterrole
+  apiGroup: rbac.authorization.k8s.io
