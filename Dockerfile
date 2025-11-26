@@ -1,38 +1,33 @@
 # ---- Etapa de compilación ----
-FROM golang:1.25-alpine AS builder
+FROM golang:1.22-alpine AS builder
 
-# Instalar git y certificados (Go los necesita)
-RUN apk add --no-cache git ca-certificates
+# Instalar certificados (git no es necesario si go.mod está completo)
+RUN apk add --no-cache ca-certificates
 
-# Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de dependencias y descargarlas
+# Copiar dependencias y descargarlas
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copiar todo el código del proyecto
+# Copiar el código fuente
 COPY . .
 
-# Compilar el binario
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o webterm ./cmd/webterm
+# Compilar el binario optimizado
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o webterm ./cmd/webterm
 
 # ---- Etapa final (runtime) ----
 FROM alpine:3.18
 
 RUN apk add --no-cache ca-certificates
 
-WORKDIR /root/
+WORKDIR /app
 
-# Copiar el binario y los archivos estáticos
+# Copiar binario y archivos estáticos
 COPY --from=builder /app/webterm .
 COPY --from=builder /app/static ./static
 
-# Puerto que usa la app
 EXPOSE 8080
-
-# Variable de entorno para el puerto
 ENV PORT=8080
 
-# Comando que ejecuta el programa
-CMD ["./webterm"]
+ENTRYPOINT ["./webterm"]

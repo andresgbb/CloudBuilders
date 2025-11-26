@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: cloudbuilders-service
+  name: cloudbuilders-svc
   labels:
     app: cloudbuilders
 spec:
+  type: NodePort
   selector:
     app: cloudbuilders
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+    - port: 80        # puerto expuesto por el servicio
+      targetPort: 8080 # puerto del contenedor
+      nodePort: 30080 # puerto accesible desde fuera (http://EC2_IP:30080)

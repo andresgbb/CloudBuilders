@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: cloudbuilders-service
+                name: cloudbuilders-svc   
                 port:
                   number: 80
