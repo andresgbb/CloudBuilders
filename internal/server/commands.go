@@ -31,9 +31,12 @@ func HandleTerminalCommand(command string) string {
 
 	case command == "whoami":
 		user := os.Getenv("USERNAME")
+		fmt.Println("Hola1")
 		if user == "" {
 			user = os.Getenv("USER")
+			fmt.Println("hola2")
 		}
+		fmt.Println("Hola3")
 		return fmt.Sprintf("Usuario actual: %s", user)
 
 	case command == "about":
